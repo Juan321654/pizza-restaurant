@@ -26,7 +26,7 @@
 
 .callButton {
   background-color: white;
-  border-radius: 50px;
+  border-radius: 50%;
   padding: 10px;
   width: 50px;
   height: 50px;
@@ -58,6 +58,7 @@
 .listItem {
   margin: 20px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .cart {

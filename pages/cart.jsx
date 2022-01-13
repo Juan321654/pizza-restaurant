@@ -1,21 +1,21 @@
-import { useState } from "react";
-import Image from "next/image";
 import styles from "../styles/Cart.module.css";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
+import OrderDetail from "../components/OrderDetail";
 
-// This values are the props in the UI
-
-function Cart() {
-  const [open, setOpen] = useState(false);
+const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const [open, setOpen] = useState(false);
+  const [cash, setCash] = useState(false);
   const amount = cart.total;
   const currency = "USD";
   const style = { layout: "vertical" };
@@ -29,8 +29,8 @@ function Cart() {
         dispatch(reset());
         router.push(`/orders/${res.data._id}`);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -97,7 +97,7 @@ function Cart() {
         <table className={styles.table}>
           <tbody>
             <tr className={styles.trTitle}>
-              <th>Products</th>
+              <th>Product</th>
               <th>Name</th>
               <th>Extras</th>
               <th>Price</th>
@@ -118,7 +118,9 @@ function Cart() {
                     />
                   </div>
                 </td>
-                <td className={styles.name}>{product.title}</td>
+                <td>
+                  <span className={styles.name}>{product.title}</span>
+                </td>
                 <td>
                   <span className={styles.extras}>
                     {product.extras.map((extra) => (
@@ -146,17 +148,22 @@ function Cart() {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Subtotal: </b> ${cart.total}
+            <b className={styles.totalTextTitle}>Subtotal:</b>${cart.total}
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Discount: </b> $0.00
+            <b className={styles.totalTextTitle}>Discount:</b>$0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Total: </b> ${cart.total}
+            <b className={styles.totalTextTitle}>Total:</b>${cart.total}
           </div>
           {open ? (
             <div className={styles.paymentMethods}>
-              <button className={styles.payButton}>Cash ondelivery</button>
+              <button
+                className={styles.payButton}
+                onClick={() => setCash(true)}
+              >
+                CASH ON DELIVERY
+              </button>
               <PayPalScriptProvider
                 options={{
                   "client-id":
@@ -171,13 +178,14 @@ function Cart() {
             </div>
           ) : (
             <button onClick={() => setOpen(true)} className={styles.button}>
-              Checkout now
+              CHECKOUT NOW!
             </button>
           )}
         </div>
       </div>
+      {cash && <OrderDetail total={cart.total} createOrder={createOrder} />}
     </div>
   );
-}
+};
 
 export default Cart;

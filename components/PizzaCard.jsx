@@ -1,9 +1,8 @@
-import React from "react";
-import styles from "../styles/PizzaCard.module.css";
 import Image from "next/image";
+import styles from "../styles/PizzaCard.module.css";
 import Link from "next/link";
 
-function PizzaCard({ pizza }) {
+const PizzaCard = ({ pizza }) => {
   return (
     <div className={styles.container}>
       <Link href={`/product/${pizza._id}`} passHref>
@@ -14,6 +13,6 @@ function PizzaCard({ pizza }) {
       <p className={styles.desc}>{pizza.desc}</p>
     </div>
   );
-}
+};
 
 export default PizzaCard;

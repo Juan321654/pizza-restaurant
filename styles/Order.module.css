@@ -48,7 +48,7 @@
   opacity: 0.3;
 }
 
-.undone .checkedIcon, 
+.undone .checkedIcon,
 .inProgress .checkedIcon {
   display: none;
 }
@@ -61,11 +61,11 @@
   width: 90%;
   max-height: 300px;
   background-color: #333;
+  color: white;
   padding: 10px 50px 50px 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: white;
 }
 
 .totalTextTitle {
@@ -80,7 +80,6 @@
   margin-top: 20px;
   cursor: not-allowed;
 }
-
 
 @media screen and (max-width: 480px) {
   .container {
@@ -129,7 +128,7 @@
     margin-bottom: 20px;
   }
 
-  .wrapper{
+  .wrapper {
     width: 100%;
   }
 }
