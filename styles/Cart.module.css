@@ -23,7 +23,7 @@
 }
 
 .name {
-  font-weight: 50;
+  font-weight: 500;
   color: #d1411e;
   font-size: 18px;
 }
@@ -78,6 +78,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
   }
 
@@ -109,7 +110,23 @@
     content: "Total: ";
     font-weight: 500;
   }
-  .wrapper{
+
+  .wrapper {
     width: 100%;
   }
+}
+
+.paymentMethods {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.payButton {
+  padding: 10px 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  background-color: white;
+  color: teal;
+  font-weight: bold;
 }
